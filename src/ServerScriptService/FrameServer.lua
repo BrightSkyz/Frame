@@ -58,21 +58,35 @@ function Init()
 		end
 	end
 	
+	-- Run post start the shared modules
+	for _, module in pairs(_G.Frame.Modules.Shared) do
+		if type(module.PostStart) == "function" then
+			module:PostStart()
+		end
+	end
+	
 	-- [[ Server Modules ]] --
 	
 	ScanPathAndRequire(ServerScriptService.Modules, false)
 	
-	-- Initialize the client modules
+	-- Initialize the server modules
 	for _, module in pairs(_G.Frame.Modules.Server) do
 		if type(module.Init) == "function" then
 			module:Init()
 		end
 	end
 	
-	-- Start the client modules
+	-- Start the server modules
 	for _, module in pairs(_G.Frame.Modules.Server) do
 		if type(module.Start) == "function" then
 			module:Start()
+		end
+	end
+
+	-- Run post start the server modules
+	for _, module in pairs(_G.Frame.Modules.Server) do
+		if type(module.PostStart) == "function" then
+			module:PostStart()
 		end
 	end
 end

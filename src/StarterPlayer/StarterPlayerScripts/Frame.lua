@@ -52,6 +52,13 @@ function Init()
 		end
 	end
 	
+	-- Run post start the shared modules
+	for _, module in pairs(_G.Frame.Modules.Shared) do
+		if type(module.PostStart) == "function" then
+			module:PostStart()
+		end
+	end
+	
 	-- [[ Client Modules ]] --
 	
 	ScanPathAndRequire(ReplicatedStorage.Modules.Client, false)
@@ -67,6 +74,13 @@ function Init()
 	for _, module in pairs(_G.Frame.Modules.Client) do
 		if type(module.Start) == "function" then
 			module:Start()
+		end
+	end
+
+	-- Run post start the client modules
+	for _, module in pairs(_G.Frame.Modules.Client) do
+		if type(module.PostStart) == "function" then
+			module:PostStart()
 		end
 	end
 end
