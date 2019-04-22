@@ -19,9 +19,9 @@ local Files = {
 	ServerScriptService = {
 		{ Type = "Folder", Name = "Modules", Contents = {
 				{ Type = "Folder", Name = "Disabled", Contents = {} }
-			},
-			{ Type = "Script", Name = "FrameServer", Path = "/src/ServerScriptService/FrameServer.lua" }
-		}
+			}
+		},
+		{ Type = "Script", Name = "FrameServer", Path = "/src/ServerScriptService/FrameServer.lua" }
 	},
 	StarterPlayerScripts = {
 		{ Type = "LocalScript", Name = "Frame", Path = "/src/StarterPlayer/StarterPlayerScripts/Frame.lua" }
