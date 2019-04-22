@@ -37,6 +37,7 @@ function Explode(path, contents)
 	for i = 1, #contents do
 		local Content = contents[i]
 		if Content.Type == "Folder" then
+			-- Folder
 			if path:FindFirstChild(Content.Name) == nil then
 				local Folder = Instance.new("Folder")
 				Folder.Name = Content.Name
@@ -44,29 +45,32 @@ function Explode(path, contents)
 			end
 			Explode(path:FindFirstChild(Content.Name), Content.Contents)
 		elseif Content.Type == "Script" then
+			-- Script
 			if path:FindFirstChild(Content.Name) == nil then
 				local Script = Instance.new("Script")
 				Script.Name = Content.Name
 				Script.Parent = path
 			end
 			local ScriptContents = HttpService:GetAsync("https://raw.githubusercontent.com/BrightSkyz/Frame/" .. CommitHash .. Content.Path)
-			path:FindFirstChild(Content.Name).Script = ScriptContents
+			path:FindFirstChild(Content.Name).Source = ScriptContents
 		elseif Content.Type == "LocalScript" then
+			-- LocalScript
 			if path:FindFirstChild(Content.Name) == nil then
 				local Script = Instance.new("LocalScript")
 				Script.Name = Content.Name
 				Script.Parent = path
 			end
 			local ScriptContents = HttpService:GetAsync("https://raw.githubusercontent.com/BrightSkyz/Frame/" .. CommitHash .. Content.Path)
-			path:FindFirstChild(Content.Name).Script = ScriptContents
+			path:FindFirstChild(Content.Name).Source = ScriptContents
 		elseif Content.Type == "ModuleScript" then
+			-- ModuleScript
 			if path:FindFirstChild(Content.Name) == nil then
 				local Script = Instance.new("ModuleScript")
 				Script.Name = Content.Name
 				Script.Parent = path
 			end
 			local ScriptContents = HttpService:GetAsync("https://raw.githubusercontent.com/BrightSkyz/Frame/" .. CommitHash .. Content.Path)
-			path:FindFirstChild(Content.Name).Script = ScriptContents
+			path:FindFirstChild(Content.Name).Source = ScriptContents
 		end
 	end
 end
